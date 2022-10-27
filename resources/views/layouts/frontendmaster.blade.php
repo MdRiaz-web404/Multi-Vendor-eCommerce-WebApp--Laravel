@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Stowaa -  Ecommerce Store</title>
+    <title>{{config('app.name')}}</title>
     <link rel="shortcut icon" href="{{ asset('frontend_assets') }}/images/logo/favourite_icon_1.png">
 
     <!-- fraimwork - css include -->

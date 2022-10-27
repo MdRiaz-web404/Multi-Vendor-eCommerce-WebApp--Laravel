@@ -135,10 +135,12 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <span class="cart_icon">
-                                            <i class="icon icon-ShoppingCart"></i>
-                                            <small class="cart_counter">3</small>
-                                        </span>
+                                        {{-- <a href="{{route('cart')}}"> --}}
+                                            <span class="cart_icon">
+                                                <i class="icon icon-ShoppingCart"></i>
+                                                <small class="cart_counter">{{cart_count()}}</small>
+                                            </span>
+                                        {{-- </a> --}}
                                     </li>
                                </ul>
                             </button>
@@ -208,6 +210,48 @@
         </header>
         <!-- header_section - end
         ================================================== -->
+         <!-- sidebar cart - start
+            ================================================== -->
+            @php
+                $cart =cart_list();
+            @endphp
+
+                <div class="sidebar-menu-wrapper">
+                    <div class="cart_sidebar">
+                        <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
+                        <ul class="cart_items_list ul_li_block mb_30 clearfix">
+                            {{-- {{$cart}} --}}
+                            @forelse ($cart as $cart_list)
+                                <li>
+                                    <div class="item_image">
+                                        {{-- <img src="{{ asset('dashboard_assets/product_photos') }}/{{$cart->relationwithproduct->featured_photo}}" alt="image_not_found"> --}}
+                                    </div>
+                                    <div class="item_content">
+                                        <h4 class="item_title">{{$cart_list->product_id}}</h4>
+                                        <span class="item_price">{{$cart_list}}</span>
+                                    </div>
+                                    <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
+                                </li>
+                            @empty
+                                <li>
+                                    <span class="text-danger">No Product to Show</span>
+                                </li>
+                            @endforelse
+                        </ul>
+
+                        <ul class="btns_group ul_li_block clearfix">
+                            <li><a class="btn btn_primary" href="{{route('cart')}}">View Cart</a></li>
+                            <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="cart_overlay"></div>
+                </div>
+
+            <!-- sidebar cart - end
+            ================================================== -->
+
+
         @yield('content')
          <!-- newsletter_section - start
             ================================================== -->

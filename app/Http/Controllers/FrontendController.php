@@ -10,6 +10,7 @@ use App\Models\Sponsor;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Mail\ContactMessage;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,6 +19,7 @@ class FrontendController extends Controller
     function home(){
         return view('frontend.index',[
             'categories'=>Category::where('status','=','active')->get(),
+            'carts'=>Cart::where('user_id',auth()->id())->get(),
             'services'=>Service::where('status','=','active')->limit(4)->get(),
             'sponsors'=>Sponsor::where('status','=','active')->limit(4)->get(),
             'products'=>Product::where('status','=','active')->limit(6)->get(),

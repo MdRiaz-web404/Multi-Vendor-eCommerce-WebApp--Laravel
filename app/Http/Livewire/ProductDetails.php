@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Cart;
 use App\Models\Inventory as ModelInventory;
 use App\Models\Product;
+use Illuminate\Validation\Rules\Exists;
 use Livewire\Component;
 
 class ProductDetails extends Component
@@ -64,28 +65,56 @@ class ProductDetails extends Component
 
     public function inventoryaddtocart()
     {
-        Cart::insert([
-            'user_id'=>auth()->id(),
-            'venor_id'=>$this->vendor,
-            'product_id'=>$this->product_id,
-            'size_id'=>$this->inventory->size_id,
-            'color_id'=>$this->inventory->color_id,
-            'quantity'=>$this->quantity,
-            'created_at'=>now(),
-        ]);
+        if(
+            Cart::where([
+                'user_id'=>auth()->id(),
+                'product_id'=>$this->product_id,
+                'size_id'=>$this->inventory->size_id,
+                'color_id'=>$this->inventory->color_id,
+            ])->exists()
+        ){
+            Cart::where([
+                'user_id'=>auth()->id(),
+                'product_id'=>$this->product_id,
+                'size_id'=>$this->inventory->size_id,
+                'color_id'=>$this->inventory->color_id,
+            ])->increment('quantity',$this->quantity);
+        }else{
+            Cart::insert([
+                'user_id'=>auth()->id(),
+                'venor_id'=>$this->vendor,
+                'product_id'=>$this->product_id,
+                'size_id'=>$this->inventory->size_id,
+                'color_id'=>$this->inventory->color_id,
+                'quantity'=>$this->quantity,
+                'created_at'=>now(),
+            ]);
+        }
         $this->reset('quantity');
         $this->session="Product added on Cart Page";
     }
     public function addtocart()
     {
-        Cart::insert([
-            'user_id'=>auth()->id(),
-            'venor_id'=>$this->vendor,
-            'product_id'=>$this->product_id,
-            'quantity'=>$this->quantity,
-            'created_at'=>now(),
-        ]);
-
+        if(
+            Cart::where([
+                'user_id'=>auth()->id(),
+                'product_id'=>$this->product_id,
+            ])->exists()
+        ){
+            Cart::where([
+                'user_id'=>auth()->id(),
+                'venor_id'=>$this->vendor,
+                'product_id'=>$this->product_id,
+            ])->increment('quantity',$this->quantity);
+        }else{
+            Cart::insert([
+                'user_id'=>auth()->id(),
+                'venor_id'=>$this->vendor,
+                'product_id'=>$this->product_id,
+                'quantity'=>$this->quantity,
+                'created_at'=>now(),
+            ]);
+        }
         $this->reset('quantity');
         $this->session="Product added on Cart Page";
 

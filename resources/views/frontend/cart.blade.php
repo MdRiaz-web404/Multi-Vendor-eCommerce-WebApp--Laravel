@@ -30,12 +30,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $sub_total=0;
+                                @endphp
                                 @foreach ($carts as $cart)
                                     <tr>
                                         <td>
                                             <div class="cart_product">
                                                 <img src="{{asset('dashboard_assets/product_photos')}}/{{$cart->relationwithproduct->featured_photo }}" alt="image_not_found">
-                                                <h6><a href="{{route('product.details',$cart->relationwithproduct->id)}}">{{$cart->relationwithproduct->product_name}}</a></h6>
+                                            <h6>
+                                                <a href="{{route('product.details',$cart->relationwithproduct->id)}}">{{$cart->relationwithproduct->product_name}}</a>
+                                                <br>
+                                                Shop:<a href="{{route('vendor.all.products',$cart->venor_id)}}" class="badge bg-success"> {{$cart->relationwithuser->shop_name}}</a>
+                                                <br>
+                                                <a href="#" class="badge bg-warning">Available Stock: {{available_stock($cart->product_id, $cart->size_id, $cart->color_id)}}</a>
+                                                <br>
+                                                @if ($cart->color_id && $cart->size_id)
+                                                    <span class="text-muted">Color: {{$cart->relationwithcolor->color}}</span> | <span class="text-muted">Size: {{$cart->relationwithsize->size_name}}</span>
+                                                @endif
+                                            </h6>
 
                                             </div>
                                         </td>
@@ -68,9 +81,12 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td class="text-center"><span class="price_text">$10.50</span></td>
+                                        <td class="text-center"><span class="price_text">{{unit_price($cart->product_id, $cart->quantity)}}</span></td>
                                         <td class="text-center"><button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button></td>
                                     </tr>
+                                    @php
+                                        $sub_total += unit_price($cart->product_id, $cart->quantity);
+                                    @endphp
                                 @endforeach
                             </tbody>
                         </table>
@@ -92,7 +108,7 @@
 
                             <div class="col col-lg-6">
                                 <ul class="btns_group ul_li_right">
-                                    <li><a class="btn border_black" href="#!">Update Cart</a></li>
+                                    <li><a class="btn border_black" href="#!">update</a></li>
                                     <li><a class="btn btn_dark" href="#!">Prceed To Checkout</a></li>
                                 </ul>
                             </div>
@@ -123,15 +139,19 @@
                                 <ul class="ul_li_block">
                                     <li>
                                         <span>Cart Subtotal</span>
-                                        <span>$52.50</span>
+                                        <span>{{$sub_total}}</span>
                                     </li>
                                     <li>
-                                        <span>Delivery Charge</span>
-                                        <span>$5</span>
+                                        <span>Discount (-)</span>
+                                        <span class="text-danger">--</span>
+                                    </li>
+                                    <li>
+                                        <span>Delivery Charge (+)</span>
+                                        <span>--</span>
                                     </li>
                                     <li>
                                         <span>Order Total</span>
-                                        <span class="total_price">$57.50</span>
+                                        <span class="total_price">--</span>
                                     </li>
                                 </ul>
                             </div>

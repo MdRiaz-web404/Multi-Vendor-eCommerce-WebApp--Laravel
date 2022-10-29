@@ -56,6 +56,10 @@ class FrontendController extends Controller
         $carts=Cart::where('user_id',auth()->id())->get();
         return view('frontend.cart',compact('carts'));
     }
+    function cart_delete ($id){
+        Cart::find($id)->delete();
+        return back()->with('success','Product removed from Cart!');
+    }
     function contact(){
         return view('frontend.contact');
     }

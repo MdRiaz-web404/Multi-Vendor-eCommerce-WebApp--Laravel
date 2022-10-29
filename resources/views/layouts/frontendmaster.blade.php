@@ -224,13 +224,22 @@
                             @forelse ($cart as $cart_list)
                                 <li>
                                     <div class="item_image">
-                                        {{-- <img src="{{ asset('dashboard_assets/product_photos') }}/{{$cart->relationwithproduct->featured_photo}}" alt="image_not_found"> --}}
+                                        <img src="{{ asset('dashboard_assets/product_photos') }}/{{product($cart_list->product_id)->featured_photo}}" alt="image_not_found">
                                     </div>
                                     <div class="item_content">
-                                        <h4 class="item_title">{{$cart_list->product_id}}</h4>
-                                        <span class="item_price">{{$cart_list}}</span>
+                                        <h4 class="item_title">{{product($cart_list->product_id)->product_name}}</h4>
+                                        <span class="item_price">
+                                            @if (product($cart_list->product_id)->discount)
+                                            {{product($cart_list->product_id)->regular_price-((product($cart_list->product_id)->regular_price*product($cart_list->product_id)->discount)/100)}}
+                                            @else
+                                            {{product($cart_list->product_id)->regular_price}}
+                                            @endif
+                                        </span>
                                     </div>
-                                    <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
+                                    <form action="{{route('cart.delete',$cart_list->id)}}" method="POST">
+                                    @csrf
+                                        <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
+                                    </form>
                                 </li>
                             @empty
                                 <li>
@@ -238,13 +247,17 @@
                                 </li>
                             @endforelse
                         </ul>
-
-                        <ul class="btns_group ul_li_block clearfix">
+                        @if (session('success'))
+                            <div class="alert alert-danger my-3">
+                                <p class="text-center">
+                                    {{session('success')}}
+                                </p>
+                            </div>
+                        @endif
+                        <ul class="btns_group ul_li_block clearfix mt-5">
                             <li><a class="btn btn_primary" href="{{route('cart')}}">View Cart</a></li>
-                            <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li>
                         </ul>
                     </div>
-
                     <div class="cart_overlay"></div>
                 </div>
 

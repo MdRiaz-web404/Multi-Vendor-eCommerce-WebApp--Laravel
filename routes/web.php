@@ -35,6 +35,7 @@ Route::get("vendor/allproducts/{id}", [FrontendController::class, "vendor_all_pr
 Route::get("category/allproducts/{id}", [FrontendController::class, "category_all_products"])->name('category.all.products');
 Route::get("shop", [FrontendController::class, "shop"])->name('shop');
 Route::get("cart", [FrontendController::class, "cart"])->name('cart');
+Route::post("cart/{id}", [FrontendController::class, "cart_delete"])->name('cart.delete');
 Route::post("contact", [FrontendController::class, "contact_post"])->name('contact.post');
 // Route::get("customer/account", [FrontendController::class, "customer_account"])->name('customer_account');
 

@@ -29,6 +29,10 @@ function available_stock($product_id, $size_id, $color_id){
     ])->first()->quantity;
 }
 
+function product($product_id){
+   return Product::find($product_id);
+}
+
 
 
 ?>

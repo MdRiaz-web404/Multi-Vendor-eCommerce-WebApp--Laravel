@@ -67,7 +67,7 @@
                         @if ($inventories->size_id)
                             <li><button class="btn btn_primary addtocart_btn" wire:click='inventoryaddtocart'>Add To Cart</button></li>
                         @else
-                            <li><button class="btn btn_primary addtocart_btn" wire:click='addtocart'>Add To Cart</button></li>
+                            <li><button class="btn btn_primary addtocart_btn" wire:click='addtocart({{$inventories->id}})'>Add To Cart</button></li>
                         @endif
                     @else
                         <li><a class="btn btn_primary addtocart_btn" id="not_logged_in">Add To Cart</a></li>

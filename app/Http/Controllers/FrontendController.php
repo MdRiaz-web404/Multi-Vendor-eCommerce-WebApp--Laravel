@@ -53,8 +53,7 @@ class FrontendController extends Controller
         return view('frontend.shop',compact('categories','all_products'));
     }
     function cart(){
-        $carts=Cart::where('user_id',auth()->id())->get();
-        return view('frontend.cart',compact('carts'));
+        return view('frontend.cart');
     }
     function cart_delete ($id){
         Cart::find($id)->delete();

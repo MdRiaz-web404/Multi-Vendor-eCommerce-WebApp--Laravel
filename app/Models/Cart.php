@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+    protected $fillable=['quantity'];
+
     public function relationwithproduct(){
         return $this->hasOne(Product::class, 'id','product_id' );
     }
@@ -19,5 +21,8 @@ class Cart extends Model
     }
     public function relationwithsize(){
         return $this->hasOne(Size::class, 'id','size_id' );
+    }
+    public function relationwithinventory(){
+        return $this->hasOne(inventory::class, 'id','inventory_id' );
     }
 }

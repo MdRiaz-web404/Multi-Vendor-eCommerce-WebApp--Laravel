@@ -86,6 +86,7 @@ class ProductDetails extends Component
                 'product_id'=>$this->product_id,
                 'size_id'=>$this->inventory->size_id,
                 'color_id'=>$this->inventory->color_id,
+                'inventory_id'=>$this->inventory->id,
                 'quantity'=>$this->quantity,
                 'created_at'=>now(),
             ]);
@@ -93,7 +94,7 @@ class ProductDetails extends Component
         $this->reset('quantity');
         $this->session="Product added on Cart Page";
     }
-    public function addtocart()
+    public function addtocart($inventory_id)
     {
         if(
             Cart::where([
@@ -107,11 +108,13 @@ class ProductDetails extends Component
                 'product_id'=>$this->product_id,
             ])->increment('quantity',$this->quantity);
         }else{
+
             Cart::insert([
                 'user_id'=>auth()->id(),
                 'venor_id'=>$this->vendor,
                 'product_id'=>$this->product_id,
                 'quantity'=>$this->quantity,
+                'inventory_id'=>$inventory_id,
                 'created_at'=>now(),
             ]);
         }

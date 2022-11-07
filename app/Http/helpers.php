@@ -21,13 +21,10 @@ function unit_price($product_id, $quantity){
    }
    return $unitPrice= $price*$quantity;
 }
-function available_stock($product_id, $size_id, $color_id){
-   return Inventory::where([
-        'product_id'=>$product_id,
-        'size_id'=>$size_id,
-        'color_id'=>$color_id,
-    ])->first()->quantity;
-}
+// function available_stock($product_id, $size_id, $color_id){
+
+
+// }
 
 function product($product_id){
    return Product::find($product_id);

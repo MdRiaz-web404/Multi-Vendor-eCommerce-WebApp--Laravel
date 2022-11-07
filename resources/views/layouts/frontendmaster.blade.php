@@ -414,8 +414,8 @@
 
     {!! NoCaptcha::renderJs() !!}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @yield('footer_scripts')
     @livewireScripts
+    @yield('footer_scripts')
 </body>
 </html>
 

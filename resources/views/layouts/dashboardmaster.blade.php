@@ -351,18 +351,8 @@ License: For each use you must have a valid license purchased only from above li
                                                 </span>
                                             </div>
                                         </div>
-                                        {{-- <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div class="menu-item menu-accordion">
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <a href="{{route('variation.index')}}" class="menu-title">List of Variations</a>
-                                                </span>
-                                            </div>
-                                        </div> --}}
                                     </div>
-                                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <div class="menu-item menu-accordion">
                                         <span class="menu-link">
                                             <span class="menu-icon">
                                                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
@@ -375,30 +365,9 @@ License: For each use you must have a valid license purchased only from above li
                                                 </span>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <span class="menu-title">Sponsor</span>
-                                            <span class="menu-arrow"></span>
+                                            <a href="{{route('coupon.create')}}" class="menu-title">Coupon</a>
                                         </span>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div  class="menu-item menu-accordion">
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <a href="{{ route('sponsor.create')}}" class="menu-title">Add Sponsor</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                            <div class="menu-item menu-accordion">
-                                                <span class="menu-link">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <a href="{{route('sponsor.index')}}" class="menu-title">List of Sponsors</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+                                    </div>
                                 @endif
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">

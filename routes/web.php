@@ -9,6 +9,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AddAdminController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CouponController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -68,6 +69,8 @@ Route::post('/product/inventory/{product}', [App\Http\Controllers\ProductControl
 Route::post('/inventory/delete/{id}', [App\Http\Controllers\ProductController::class,'inventory_delete'])->name('inventory.delete');
 // VariationController
 Route::resource('/variation', App\Http\Controllers\VariationController::class)->Middleware('Vendor');
+// CouponController
+Route::resource('/coupon', App\Http\Controllers\CouponController::class)->Middleware('Vendor');
 
 
 Route::middleware(['AdminRoleChecker'])->group(function () {
